@@ -2,7 +2,7 @@
 <html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Решись Авиа</title>
   <link rel="icon" href="/favicon.ico?v=7" type="image/x-icon" />
   <link rel="shortcut icon" href="/favicon.ico?v=7" type="image/x-icon" />
@@ -24,7 +24,7 @@
       --gold: #f59e0b;
       --emerald: #10b981;
       --rose: #f43f5e;
-      --header-bg: rgba(11, 17, 32, 0.88);
+      --header-bg: rgba(11, 17, 32, 0.92);
       --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     }
 
@@ -44,7 +44,7 @@
       --gold: #d97706;
       --emerald: #059669;
       --rose: #e11d48;
-      --header-bg: rgba(255, 255, 255, 0.9);
+      --header-bg: rgba(255, 255, 255, 0.94);
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
     }
 
@@ -52,6 +52,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -63,6 +64,7 @@
       line-height: 1.5;
       min-height: 100vh;
       padding-bottom: 48px;
+      overflow-x: hidden;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
@@ -72,24 +74,27 @@
       z-index: 150;
       background: var(--header-bg);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 28px;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 9px;
       color: var(--text);
       user-select: none;
+      flex-shrink: 0;
     }
 
     .brand-icon {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       flex-shrink: 0;
       object-fit: contain;
       border-radius: 7px;
@@ -97,7 +102,7 @@
     }
 
     .brand-title {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.3px;
       background: linear-gradient(90deg, var(--text) 0%, var(--accent) 100%);
@@ -108,33 +113,35 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       font-family: inherit;
       font-size: 13.5px;
       font-weight: 600;
       border-radius: 10px;
-      padding: 9px 16px;
+      padding: 8px 14px;
       cursor: pointer;
       border: 1px solid transparent;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
     }
 
     .btn-glow {
       background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
       color: #ffffff;
-      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
     }
 
     .btn-glow:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 22px rgba(99, 102, 241, 0.42);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.38);
       filter: brightness(1.06);
     }
 
@@ -153,22 +160,24 @@
       background: var(--surface-elevated);
       color: var(--text-muted);
       border: 1px solid var(--border);
-      padding: 5px 11px;
-      font-size: 12px;
+      padding: 4px 10px;
+      font-size: 11.5px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
 
-    .btn-chip:hover {
+    .btn-chip:hover, .btn-chip:active {
       color: var(--text);
       border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .theme-btn {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
@@ -187,15 +196,15 @@
     .user-area {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .avatar-wrapper {
       position: relative;
       display: flex;
       align-items: center;
-      gap: 9px;
-      padding: 4px 12px 4px 5px;
+      gap: 7px;
+      padding: 3px 10px 3px 4px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -207,8 +216,8 @@
     }
 
     .avatar-circle {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -218,15 +227,19 @@
     }
 
     .avatar-circle svg {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       display: block;
     }
 
     .user-name-label {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: var(--text);
+      max-width: 90px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .avatar-picker-popover {
@@ -236,7 +249,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 8px 10px;
+      padding: 6px 8px;
       box-shadow: var(--shadow);
       opacity: 0;
       visibility: hidden;
@@ -263,12 +276,12 @@
 
     .avatar-options-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
     }
 
     .avatar-opt-btn {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       border: 2px solid transparent;
       padding: 0;
@@ -298,39 +311,39 @@
 
     .main-wrap {
       max-width: 1240px;
-      margin: 26px auto 0;
-      padding: 0 22px;
+      margin: 22px auto 0;
+      padding: 0 16px;
     }
 
     .visual-showcase {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 22px;
+      gap: 16px;
+      margin-bottom: 20px;
     }
 
     .visual-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 18px;
+      padding: 16px;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .visual-card svg {
       width: 100%;
-      height: 128px;
+      height: 115px;
       border-radius: 12px;
       background: var(--surface-input);
       border: 1px solid var(--border);
     }
 
     .visual-caption {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text);
       text-align: center;
@@ -339,7 +352,7 @@
     .workspace-grid {
       display: grid;
       grid-template-columns: 345px 1fr;
-      gap: 22px;
+      gap: 20px;
       align-items: start;
     }
 
@@ -347,7 +360,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       box-shadow: var(--shadow);
     }
 
@@ -355,48 +368,50 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
     .card-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: var(--text);
     }
 
     .field {
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
     .field-label-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       gap: 8px;
     }
 
     .field label {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
     }
 
     .range-badge {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--accent);
       background: rgba(56, 189, 248, 0.1);
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 6px;
+      white-space: nowrap;
     }
 
+    /* 16px предотвращает автозум в iOS Safari */
     .input-ctrl {
       width: 100%;
-      padding: 10px 13px;
-      font-size: 14px;
+      padding: 10px 12px;
+      font-size: 16px;
       font-family: inherit;
       color: var(--text);
       background: var(--surface-input);
@@ -406,11 +421,16 @@
       transition: border-color 0.15s ease;
     }
 
+    @media (min-width: 600px) {
+      .input-ctrl {
+        font-size: 14px;
+      }
+    }
+
     .input-ctrl:focus {
       border-color: var(--border-focus);
     }
 
-    /* Убираем стандартные системные стрелочки у number, чтобы сделать стильные свои с шагом 100 ₽ */
     input[type="number"].no-spin::-webkit-inner-spin-button,
     input[type="number"].no-spin::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -427,14 +447,14 @@
     }
 
     .step-btn {
-      height: 40px;
-      padding: 0 11px;
+      height: 42px;
+      padding: 0 12px;
       border-radius: 10px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       color: var(--text);
       font-family: inherit;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       flex-shrink: 0;
@@ -442,16 +462,11 @@
       user-select: none;
     }
 
-    .step-btn:hover {
+    .step-btn:hover, .step-btn:active {
       border-color: var(--accent);
       color: var(--accent);
     }
 
-    .step-btn:active {
-      transform: scale(0.96);
-    }
-
-    /* Кастомный селект города в стилистике сайта (вместо стандартного системного <select>) */
     .city-dropdown {
       position: relative;
       user-select: none;
@@ -459,8 +474,8 @@
 
     .city-trigger {
       width: 100%;
-      padding: 10px 13px;
-      font-size: 14px;
+      padding: 10px 12px;
+      font-size: 14.5px;
       color: var(--text);
       background: var(--surface-input);
       border: 1px solid var(--border);
@@ -469,7 +484,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.15s ease;
     }
 
     .city-trigger:hover,
@@ -588,14 +603,14 @@
       background: var(--border);
       border-radius: 999px;
       outline: none;
-      margin: 12px 0 8px;
+      margin: 10px 0 6px;
     }
 
     input[type="range"].price-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: var(--accent);
       border: 2px solid #ffffff;
@@ -604,19 +619,19 @@
 
     .quick-row {
       display: flex;
-      gap: 8px;
-      margin-top: 4px;
+      gap: 6px;
+      margin-top: 5px;
       flex-wrap: wrap;
     }
 
     .meta-list {
-      margin-top: 16px;
-      padding-top: 14px;
+      margin-top: 14px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      font-size: 12.5px;
+      gap: 6px;
+      font-size: 12px;
     }
 
     .meta-row {
@@ -635,15 +650,15 @@
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .kpi-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 15px;
+      padding: 13px 14px;
       position: relative;
       overflow: hidden;
     }
@@ -667,41 +682,48 @@
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .kpi-val {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
-      margin-top: 5px;
+      margin-top: 4px;
       font-variant-numeric: tabular-nums;
+      line-height: 1.15;
     }
 
     .kpi-sub {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-muted);
-      margin-top: 3px;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .chart-container {
       position: relative;
-      height: 360px;
+      height: 330px;
       width: 100%;
     }
 
     .table-wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      margin: 0 -2px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12.5px;
       font-variant-numeric: tabular-nums;
+      min-width: 580px;
     }
 
     th, td {
-      padding: 10px 12px;
+      padding: 9px 10px;
       text-align: right;
       border-bottom: 1px solid var(--border);
       white-space: nowrap;
@@ -709,26 +731,38 @@
 
     th:first-child, td:first-child {
       text-align: left;
+      position: sticky;
+      left: 0;
+      background: var(--surface);
+      z-index: 2;
+    }
+
+    th:first-child {
+      background: var(--surface-elevated);
     }
 
     th {
       color: var(--text-muted);
       font-weight: 600;
-      font-size: 12px;
+      font-size: 11.5px;
       background: var(--surface-elevated);
     }
 
     tr.median-highlight {
-      background: rgba(245, 158, 11, 0.1);
+      background: rgba(245, 158, 11, 0.08);
       font-weight: 700;
+    }
+
+    tr.median-highlight td:first-child {
+      background: rgba(245, 158, 11, 0.12);
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
-      padding: 3px 9px;
+      padding: 2px 8px;
       border-radius: 999px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
     }
 
@@ -745,8 +779,9 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(3, 7, 18, 0.72);
+      background: rgba(3, 7, 18, 0.75);
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       display: none;
       justify-content: center;
       align-items: center;
@@ -763,8 +798,8 @@
       border: 1px solid var(--border);
       border-radius: 18px;
       width: 100%;
-      max-width: 390px;
-      padding: 22px;
+      max-width: 380px;
+      padding: 20px;
       box-shadow: var(--shadow);
     }
 
@@ -775,12 +810,12 @@
       background: var(--surface-input);
       padding: 4px;
       border-radius: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       border: 1px solid var(--border);
     }
 
     .modal-tab {
-      padding: 8px;
+      padding: 7px;
       border-radius: 8px;
       border: none;
       background: transparent;
@@ -807,7 +842,7 @@
 
     .eye-btn {
       position: absolute;
-      right: 8px;
+      right: 6px;
       background: transparent;
       border: none;
       color: var(--text-muted);
@@ -824,14 +859,14 @@
       background: rgba(244, 63, 94, 0.14);
       border: 1px solid rgba(244, 63, 94, 0.35);
       color: var(--rose);
-      padding: 9px 12px;
+      padding: 8px 11px;
       border-radius: 10px;
-      font-size: 12.5px;
-      margin-bottom: 14px;
+      font-size: 12px;
+      margin-bottom: 12px;
       display: none;
     }
 
-    /* Адаптация под планшеты и телефоны */
+    /* Адаптивность под планшеты */
     @media (max-width: 960px) {
       .workspace-grid {
         grid-template-columns: 1fr;
@@ -841,49 +876,53 @@
       }
     }
 
-    @media (max-width: 720px) {
+    /* Адаптивность под смартфоны */
+    @media (max-width: 640px) {
       header {
-        padding: 10px 14px;
+        padding: 8px 12px;
       }
       .brand-title {
-        font-size: 16.5px;
+        font-size: 16px;
       }
       .main-wrap {
-        margin-top: 16px;
-        padding: 0 12px;
+        margin-top: 14px;
+        padding: 0 10px;
       }
       .card {
-        padding: 15px;
+        padding: 14px;
         border-radius: 14px;
       }
       .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 8px;
+      }
+      .kpi-card {
+        padding: 10px 12px;
       }
       .kpi-val {
-        font-size: 20px;
+        font-size: 19px;
+      }
+      .kpi-sub {
+        font-size: 10.5px;
       }
       .chart-container {
-        height: 270px;
+        height: 250px;
       }
       .btn {
-        padding: 8px 12px;
+        padding: 7px 11px;
         font-size: 12.5px;
       }
-      .avatar-picker-popover {
-        right: -40px;
-      }
-    }
-
-    @media (max-width: 420px) {
       .user-name-label {
         display: none;
       }
       .avatar-wrapper {
-        padding: 4px;
+        padding: 3px;
       }
-      .kpi-grid {
-        grid-template-columns: 1fr 1fr;
+      .avatar-picker-popover {
+        right: -30px;
+      }
+      .modal {
+        padding: 16px;
       }
     }
   </style>
@@ -897,7 +936,7 @@
     </div>
 
     <div class="header-right">
-      <button class="theme-btn" onclick="toggleTheme()" title="Тема">
+      <button class="theme-btn" onclick="toggleTheme()" title="Сменить тему">
         <span id="themeIcon">☀️</span>
       </button>
 
@@ -981,7 +1020,7 @@
                 <th>Чувствительность</th>
                 <th>Себестоимость, ₽</th>
                 <th>Диапазон цен, ₽</th>
-                <th>Вместимость (мест)</th>
+                <th>Вместимость</th>
               </tr>
             </thead>
             <tbody id="publicRoutesTableBody"></tbody>
@@ -999,7 +1038,7 @@
           </div>
 
           <form id="calcForm" onsubmit="event.preventDefault(); calculateForecast();">
-            <!-- Кастомный выбор города Откуда -->
+            <!-- Город Откуда -->
             <div class="field">
               <div class="field-label-row">
                 <label>Откуда</label>
@@ -1026,7 +1065,7 @@
               </button>
             </div>
 
-            <!-- Кастомный выбор города Куда -->
+            <!-- Город Куда -->
             <div class="field">
               <div class="field-label-row">
                 <label>Куда</label>
@@ -1045,21 +1084,29 @@
               </div>
             </div>
 
+            <!-- Дата вылета в формате ДД.ММ или ДД:ММ -->
             <div class="field">
               <div class="field-label-row">
-                <label for="dateInput">Дата вылета</label>
-                <span class="range-badge" id="dateRangeBadge">1 июня – 1 июля</span>
+                <label for="dateInput">Дата вылета (ДД.ММ)</label>
+                <span class="range-badge" id="dateRangeBadge">01.06 – 01.07</span>
               </div>
               <input
                 type="text"
                 class="input-ctrl"
                 id="dateInput"
-                placeholder="12 июня"
+                placeholder="12.06"
+                inputmode="numeric"
                 required
               />
+              <div class="quick-row">
+                <button type="button" class="btn-chip" onclick="setDatePreset('01.06')">01.06</button>
+                <button type="button" class="btn-chip" onclick="setDatePreset('12.06')">12.06</button>
+                <button type="button" class="btn-chip" onclick="setDatePreset('20.06')">20.06</button>
+                <button type="button" class="btn-chip" onclick="setDatePreset('01.07')">01.07</button>
+              </div>
             </div>
 
-            <!-- Поле цены с точностью до 1 рубля и кнопками +/- 100 ₽ -->
+            <!-- Поле цены -->
             <div class="field">
               <div class="field-label-row">
                 <label for="priceInput">Цена билета, ₽</label>
@@ -1074,6 +1121,7 @@
                   step="1"
                   min="1"
                   max="100000"
+                  inputmode="numeric"
                   required
                   oninput="onPriceDraftChange('input')"
                 />
@@ -1096,7 +1144,7 @@
 
             <div class="error-banner" id="calcErrorBanner"></div>
 
-            <button type="submit" class="btn btn-glow" style="width:100%;">
+            <button type="submit" class="btn btn-glow" style="width:100%; height:44px; margin-top:4px;">
               Рассчитать
             </button>
           </form>
@@ -1119,13 +1167,13 @@
             </div>
 
             <div class="kpi-card c-gold">
-              <div class="kpi-label">Желают (медиана)</div>
+              <div class="kpi-label">Желают (0.5)</div>
               <div class="kpi-val" id="kpiWilling">—</div>
               <div class="kpi-sub" id="kpiBaseDemand">При базовой: —</div>
             </div>
 
             <div class="kpi-card c-emerald">
-              <div class="kpi-label">Купят (продажи)</div>
+              <div class="kpi-label">Купят билетов</div>
               <div class="kpi-val" id="kpiSold">—</div>
               <div class="kpi-sub" id="kpiLoad">Загрузка: —%</div>
             </div>
@@ -1137,7 +1185,7 @@
             </div>
           </div>
 
-          <div class="card" style="margin-bottom: 18px;">
+          <div class="card" style="margin-bottom: 16px;">
             <div class="card-header">
               <div class="card-title" id="chartTitleText">Распределение спроса (квантили 0.1 – 0.9)</div>
               <div id="capStatusBadge"></div>
@@ -1217,16 +1265,15 @@
           <div class="avatar-options-row" id="modalAvatarPicker" style="margin-top:4px;"></div>
         </div>
 
-        <div style="display:flex; gap:10px; margin-top:18px;">
-          <button type="submit" class="btn btn-glow" style="flex:1;" id="authSubmitBtn">Войти</button>
-          <button type="button" class="btn btn-ghost" onclick="closeAuthModal()">Отмена</button>
+        <div style="display:flex; gap:8px; margin-top:16px;">
+          <button type="submit" class="btn btn-glow" style="flex:1; height:42px;" id="authSubmitBtn">Войти</button>
+          <button type="button" class="btn btn-ghost" style="height:42px;" onclick="closeAuthModal()">Отмена</button>
         </div>
       </form>
     </div>
   </div>
 
   <script>
-    // Зелёный аватар (#3) отцентрирован ровно по центру круга (20, 20)
     const AVATARS = {
       1: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#0284c7"/><circle cx="20" cy="15" r="6" fill="#f8fafc"/><path d="M9 35c2-6 7-9 11-9s9 3 11 9" fill="#f8fafc"/><path d="M12 12h16l-2-4H14l-2 4z" fill="#0f172a"/><path d="M17 10h6v1.5h-6z" fill="#f59e0b"/></svg>`,
       2: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#6366f1"/><circle cx="20" cy="15" r="6" fill="#f8fafc"/><path d="M9 35c2-6 7-9 11-9s9 3 11 9" fill="#f8fafc"/><rect x="13" y="13" width="14" height="4" rx="2" fill="#0f172a"/></svg>`,
@@ -1257,7 +1304,7 @@
 
         ctx.save();
 
-        // 1. Красим в красный цвет всю часть столбца выше красной линии мест
+        // 1. Подсветка избыточного спроса красным
         if (barMeta && barMeta.data && seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
           barMeta.data.forEach((bar) => {
             if (bar.y < seatsY - 0.5) {
@@ -1283,64 +1330,66 @@
           });
         }
 
-        // 2. Одна фиксированная красная линия доступных мест
+        // 2. Линия вместимости
         if (seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
           ctx.beginPath();
           ctx.setLineDash([8, 6]);
-          ctx.lineWidth = 2.5;
+          ctx.lineWidth = 2.2;
           ctx.strokeStyle = '#f43f5e';
           ctx.moveTo(chartArea.left, seatsY);
           ctx.lineTo(chartArea.right, seatsY);
           ctx.stroke();
           ctx.setLineDash([]);
 
-          const tagText = `Доступно мест: ${lastResult.seats}`;
-          ctx.font = '700 11.5px Inter, sans-serif';
+          const isMobile = window.innerWidth < 640;
+          const tagText = isMobile ? `Мест: ${lastResult.seats}` : `Доступно мест: ${lastResult.seats}`;
+          ctx.font = '700 11px Inter, sans-serif';
           const textWidth = ctx.measureText(tagText).width;
-          const boxW = textWidth + 14;
-          const boxH = 20;
-          const boxX = chartArea.right - boxW - 8;
-          const boxY = Math.max(chartArea.top + 4, seatsY - boxH - 5);
+          const boxW = textWidth + 12;
+          const boxH = 19;
+          const boxX = chartArea.right - boxW - 6;
+          const boxY = Math.max(chartArea.top + 3, seatsY - boxH - 4);
 
           ctx.fillStyle = '#f43f5e';
           ctx.beginPath();
-          ctx.roundRect(boxX, boxY, boxW, boxH, 6);
+          ctx.roundRect(boxX, boxY, boxW, boxH, 5);
           ctx.fill();
 
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
-          ctx.fillText(tagText, boxX + 7, boxY + boxH / 2);
+          ctx.fillText(tagText, boxX + 6, boxY + boxH / 2);
         }
 
-        // 3. Подписи значений над каждым столбцом
+        // 3. Подписи значений над столбцами
         if (barMeta && barMeta.data) {
-          ctx.font = '700 11px Inter, sans-serif';
+          const isMobile = window.innerWidth < 640;
+          ctx.font = '700 10.5px Inter, sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
 
           barMeta.data.forEach((bar, idx) => {
             const val = chart.data.datasets[0].data[idx];
             const isMedian = idx === 4;
-            const label = isMedian ? `${val} (медиана)` : `${val}`;
-            const yPos = bar.y - 6;
+            const label = (isMedian && !isMobile) ? `${val} (мед.)` : `${val}`;
+            const yPos = bar.y - 5;
 
             if (isMedian) {
-              const w = ctx.measureText(label).width + 12;
+              const w = ctx.measureText(label).width + 8;
               ctx.fillStyle = '#f59e0b';
               ctx.beginPath();
-              ctx.roundRect(bar.x - w / 2, yPos - 18, w, 19, 5);
+              ctx.roundRect(bar.x - w / 2, yPos - 16, w, 17, 4);
               ctx.fill();
               ctx.fillStyle = '#0b1120';
               ctx.fillText(label, bar.x, yPos - 2);
             } else {
-              ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#e2e8f0' : '#1e293b';
+              ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#cbd5e1' : '#334155';
               ctx.fillText(label, bar.x, yPos);
             }
           });
         }
 
-        ctx.restore();
+        ctx.restore;
       }
     };
 
@@ -1436,7 +1485,6 @@
       }
     }
 
-    // Кастомные выпадающие списки для выбора города «Откуда» и «Куда»
     function toggleCityDropdown(type, e) {
       e.stopPropagation();
       const targetId = type === 'origin' ? 'originDropdown' : 'destinationDropdown';
@@ -1455,7 +1503,6 @@
     function renderCityDropdowns() {
       if (!metadata) return;
 
-      // 1. В списке «Откуда» доступны ВСЕ города маршрутной сети (Москва, Сочи, Санкт-Петербург, Казань, Екатеринбург, Новосибирск)
       const origMenu = document.getElementById('originMenu');
       origMenu.innerHTML = '';
       metadata.cities.forEach(city => {
@@ -1473,7 +1520,6 @@
       document.getElementById('originTriggerName').textContent = origObj.name;
       document.getElementById('originTriggerCode').textContent = origObj.code;
 
-      // 2. Список «Куда» подстраивается под выбранный город отправления
       const validDestinations = getAvailableDestinationsForOrigin(selectedOrigin);
       if (!validDestinations.some(d => d.code === selectedDestination) && validDestinations.length > 0) {
         selectedDestination = validDestinations[0].code;
@@ -1548,6 +1594,10 @@
       updateRoutePriceBounds(true);
     }
 
+    function setDatePreset(val) {
+      document.getElementById('dateInput').value = val;
+    }
+
     function getSelectedRouteInfo() {
       if (!metadata) return null;
       const code = `${selectedOrigin}-${selectedDestination}`;
@@ -1578,7 +1628,6 @@
         `${r.price_min.toLocaleString('ru-RU')} – ${r.price_max.toLocaleString('ru-RU')} ₽`;
     }
 
-    // Точность цены до единиц рублей (1 ₽), а кнопки «−100» / «+100» меняют цену по сотне
     function stepPriceBy(delta) {
       const input = document.getElementById('priceInput');
       const slider = document.getElementById('priceSlider');
@@ -1689,7 +1738,7 @@
       badgeBox.innerHTML = `<span class="status-pill ${data.capped_by_seats ? 'cap' : 'ok'}">${statusText}</span>`;
 
       document.getElementById('chartTitleText').textContent =
-        `${data.route} · ${data.display_date} · Цена ${Math.round(data.price).toLocaleString('ru-RU')} ₽`;
+        `${data.route} · ${data.display_date} · ${Math.round(data.price).toLocaleString('ru-RU')} ₽`;
 
       const tbody = document.getElementById('scenariosTableBody');
       tbody.innerHTML = '';
@@ -1723,7 +1772,7 @@
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
       const labels = data.scenarios.map(s =>
-        s.quantile === '0.5' ? '0.5 (Медиана)' : s.quantile
+        s.quantile === '0.5' ? '0.5' : s.quantile
       );
       const willingArr = data.scenarios.map(s => s.willing);
 
@@ -1758,7 +1807,7 @@
               ),
               borderWidth: 1.5,
               borderRadius: 6,
-              barPercentage: 0.6
+              barPercentage: 0.65
             }
           ]
         },
@@ -1779,14 +1828,14 @@
               bodyColor: isDark ? '#cbd5e1' : '#334155',
               borderColor: isDark ? '#334155' : '#cbd5e1',
               borderWidth: 1,
-              padding: 10,
+              padding: 9,
               callbacks: {
                 afterBody: function(context) {
                   const idx = context[0].dataIndex;
                   const sc = data.scenarios[idx];
                   const lines = [
                     `Купят билетов: ${sc.sold}`,
-                    `Всего мест в самолёте: ${data.seats}`
+                    `Всего мест: ${data.seats}`
                   ];
                   if (sc.excess > 0) {
                     lines.push(`Превышает на ${sc.excess} мест`);
@@ -1942,3 +1991,4 @@
   </script>
 </body>
 </html>
+

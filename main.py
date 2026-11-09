@@ -134,14 +134,20 @@ def build_date_range_info(dates_list: list) -> dict:
     max_d = sorted_dates[-1]
     years = sorted({int(d.split("-")[0]) for d in sorted_dates})
     single_year = len(years) == 1
-    label = f"{format_date_ru(min_d, not single_year)} – {format_date_ru(max_d, not single_year)}"
+    
+    dt_min = pd.to_datetime(min_d)
+    dt_max = pd.to_datetime(max_d)
+    short_label = f"{dt_min.day:02d}.{dt_min.month:02d} – {dt_max.day:02d}.{dt_max.month:02d}"
+    
     preferred = "2026-06-12" if "2026-06-12" in sorted_dates else min_d
-    default_input = format_date_ru(preferred, not single_year)
+    pref_dt = pd.to_datetime(preferred)
+    default_input = f"{pref_dt.day:02d}.{pref_dt.month:02d}"
+
     return {
         "min_date": min_d,
         "max_date": max_d,
         "single_year": single_year,
-        "label": label,
+        "label": short_label,
         "default_input": default_input,
     }
 
@@ -157,6 +163,17 @@ def resolve_user_date(raw_date: str, available_dates: list) -> str:
     years = sorted({int(d.split("-")[0]) for d in available_dates})
     default_year = years[0] if years else 2026
 
+    m_num = re.match(r"^(\d{1,2})[:./-](\d{1,2})(?:[:./-](\d{2,4}))?$", s)
+    if m_num:
+        d1, d2, y_raw = int(m_num.group(1)), int(m_num.group(2)), m_num.group(3)
+        year = int(y_raw) if y_raw else default_year
+        if year < 100:
+            year += 2000
+
+        for cand in [f"{year:04d}-{d2:02d}-{d1:02d}", f"{year:04d}-{d1:02d}-{d2:02d}"]:
+            if cand in available_dates:
+                return cand
+
     m_text = re.match(r"^(\d{1,2})\s+([а-яёa-z]+)(?:\s+(\d{4}))?$", s)
     if m_text:
         day = int(m_text.group(1))
@@ -168,18 +185,8 @@ def resolve_user_date(raw_date: str, available_dates: list) -> str:
             if candidate in available_dates:
                 return candidate
 
-    m_num = re.match(r"^(\d{1,2})[./-](\d{1,2})(?:[./-](\d{2,4}))?$", s)
-    if m_num:
-        d1, d2, y_raw = int(m_num.group(1)), int(m_num.group(2)), m_num.group(3)
-        year = int(y_raw) if y_raw else default_year
-        if year < 100:
-            year += 2000
-        for cand in [f"{year:04d}-{d2:02d}-{d1:02d}", f"{year:04d}-{d1:02d}-{d2:02d}"]:
-            if cand in available_dates:
-                return cand
-
     info = build_date_range_info(available_dates)
-    raise ValueError(f"Введите дату из диапазона {info['label']} (например, {info['default_input']}).")
+    raise ValueError(f"Введите дату в формате ДД.ММ из диапазона {info['label']} (например, {info['default_input']}).")
 
 
 def parse_route_cities(row: pd.Series) -> dict:
@@ -496,3 +503,4 @@ def serve_index():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
