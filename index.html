@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Решись Авиа</title>
+  <link rel="icon" href="/favicon.ico?v=7" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico?v=7" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root[data-theme="dark"] {
+      --bg: #070b14;
+      --bg-mesh: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08), transparent 40%),
+                 radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.08), transparent 40%);
+      --surface: #0f172a;
+      --surface-elevated: #162038;
+      --surface-input: #0b1120;
+      --border: #1e293b;
+      --border-focus: #38bdf8;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-indigo: #6366f1;
+      --gold: #f59e0b;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --header-bg: rgba(11, 17, 32, 0.88);
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f1f5f9;
+      --bg-mesh: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12), transparent 40%),
+                 radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.1), transparent 40%);
+      --surface: #ffffff;
+      --surface-elevated: #f8fafc;
+      --surface-input: #f8fafc;
+      --border: #e2e8f0;
+      --border-focus: #2563eb;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-indigo: #4f46e5;
+      --gold: #d97706;
+      --emerald: #059669;
+      --rose: #e11d48;
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      background-image: var(--bg-mesh);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding-bottom: 48px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 150;
+      background: var(--header-bg);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .brand-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      object-fit: contain;
+      border-radius: 7px;
+      display: block;
+    }
+
+    .brand-title {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      background: linear-gradient(90deg, var(--text) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 9px 16px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-glow {
+      background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(99, 102, 241, 0.42);
+      filter: brightness(1.06);
+    }
+
+    .btn-ghost {
+      background: var(--surface-elevated);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-chip {
+      background: var(--surface-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 5px 11px;
+      font-size: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-chip:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 4px 12px 4px 5px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .avatar-wrapper:hover {
+      border-color: var(--accent);
+    }
+
+    .avatar-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar-circle svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    .user-name-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .avatar-picker-popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 10px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: all 0.18s ease;
+      z-index: 200;
+    }
+
+    .avatar-wrapper::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 10px;
+    }
+
+    .avatar-wrapper:hover .avatar-picker-popover,
+    .avatar-wrapper.open .avatar-picker-popover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .avatar-options-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .avatar-opt-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar-opt-btn svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .avatar-opt-btn:hover {
+      transform: scale(1.12);
+    }
+
+    .avatar-opt-btn.selected {
+      border-color: var(--accent);
+    }
+
+    .main-wrap {
+      max-width: 1240px;
+      margin: 26px auto 0;
+      padding: 0 22px;
+    }
+
+    .visual-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .visual-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .visual-card svg {
+      width: 100%;
+      height: 128px;
+      border-radius: 12px;
+      background: var(--surface-input);
+      border: 1px solid var(--border);
+    }
+
+    .visual-caption {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 345px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .range-badge {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .input-ctrl {
+      width: 100%;
+      padding: 10px 13px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--surface-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .input-ctrl:focus {
+      border-color: var(--border-focus);
+    }
+
+    /* Убираем стандартные системные стрелочки у number, чтобы сделать стильные свои с шагом 100 ₽ */
+    input[type="number"].no-spin::-webkit-inner-spin-button,
+    input[type="number"].no-spin::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"].no-spin {
+      -moz-appearance: textfield;
+    }
+
+    .price-input-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .step-btn {
+      height: 40px;
+      padding: 0 11px;
+      border-radius: 10px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .step-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .step-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Кастомный селект города в стилистике сайта (вместо стандартного системного <select>) */
+    .city-dropdown {
+      position: relative;
+      user-select: none;
+    }
+
+    .city-trigger {
+      width: 100%;
+      padding: 10px 13px;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .city-trigger:hover,
+    .city-dropdown.open .city-trigger {
+      border-color: var(--border-focus);
+    }
+
+    .city-trigger-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .city-code-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: var(--surface-elevated);
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .city-arrow {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      transition: transform 0.18s ease;
+    }
+
+    .city-dropdown.open .city-arrow {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .city-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 6px;
+      z-index: 120;
+      max-height: 240px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: all 0.16s ease;
+    }
+
+    .city-dropdown.open .city-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .city-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      transition: background 0.12s ease;
+    }
+
+    .city-option:hover {
+      background: var(--surface-elevated);
+    }
+
+    .city-option.selected {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .swap-cities-row {
+      display: flex;
+      justify-content: center;
+      margin: -6px 0 8px;
+    }
+
+    .swap-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .swap-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: rotate(180deg);
+    }
+
+    input[type="range"].price-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 999px;
+      outline: none;
+      margin: 12px 0 8px;
+    }
+
+    input[type="range"].price-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #ffffff;
+      cursor: pointer;
+    }
+
+    .quick-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .meta-list {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 12.5px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      gap: 8px;
+    }
+
+    .meta-row strong {
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+    }
+
+    .kpi-card.c-blue::before { background: var(--accent); }
+    .kpi-card.c-gold::before { background: var(--gold); }
+    .kpi-card.c-emerald::before { background: var(--emerald); }
+    .kpi-card.c-indigo::before { background: var(--accent-indigo); }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .kpi-val {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 360px;
+      width: 100%;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 12px;
+      background: var(--surface-elevated);
+    }
+
+    tr.median-highlight {
+      background: rgba(245, 158, 11, 0.1);
+      font-weight: 700;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .status-pill.cap {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--rose);
+    }
+
+    .status-pill.ok {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.72);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 300;
+      padding: 16px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 390px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--surface-input);
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .modal-tab {
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .modal-tab.active {
+      background: var(--surface-elevated);
+      color: var(--text);
+    }
+
+    .password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrap .input-ctrl {
+      padding-right: 42px;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+    }
+
+    .eye-btn:hover {
+      color: var(--accent);
+    }
+
+    .error-banner {
+      background: rgba(244, 63, 94, 0.14);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: var(--rose);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    /* Адаптация под планшеты и телефоны */
+    @media (max-width: 960px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+      .visual-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding: 10px 14px;
+      }
+      .brand-title {
+        font-size: 16.5px;
+      }
+      .main-wrap {
+        margin-top: 16px;
+        padding: 0 12px;
+      }
+      .card {
+        padding: 15px;
+        border-radius: 14px;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .kpi-val {
+        font-size: 20px;
+      }
+      .chart-container {
+        height: 270px;
+      }
+      .btn {
+        padding: 8px 12px;
+        font-size: 12.5px;
+      }
+      .avatar-picker-popover {
+        right: -40px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .user-name-label {
+        display: none;
+      }
+      .avatar-wrapper {
+        padding: 4px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="/favicon.ico?v=7" alt="Решись Авиа" class="brand-icon" />
+      <span class="brand-title">Решись Авиа</span>
+    </div>
+
+    <div class="header-right">
+      <button class="theme-btn" onclick="toggleTheme()" title="Тема">
+        <span id="themeIcon">☀️</span>
+      </button>
+
+      <button class="btn btn-glow" id="guestLoginBtn" onclick="openAuthModal('login')">
+        Войти
+      </button>
+
+      <div class="user-area" id="userProfileArea" style="display:none;">
+        <div class="avatar-wrapper" id="avatarWrapper" onclick="toggleAvatarPopoverMobile(event)">
+          <div class="avatar-circle" id="currentAvatarIcon"></div>
+          <span class="user-name-label" id="currentUserName">admin</span>
+          <div class="avatar-picker-popover">
+            <div class="avatar-options-row" id="headerAvatarPicker"></div>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="handleLogout()">Выйти</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <!-- Гостевой экран -->
+    <section id="guestSection" style="display:none;">
+      <div class="visual-showcase">
+        <div class="visual-card">
+          <svg viewBox="0 0 280 128" fill="none">
+            <circle cx="48" cy="76" r="14" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2"/>
+            <circle cx="48" cy="76" r="4" fill="#38bdf8"/>
+            <circle cx="232" cy="76" r="14" fill="rgba(99,102,241,0.18)" stroke="#6366f1" stroke-width="2"/>
+            <circle cx="232" cy="76" r="4" fill="#6366f1"/>
+            <path d="M64 70 Q140 16 216 70" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5 5"/>
+            <g transform="translate(126, 26)">
+              <path d="M24 4L14 14L4 11L2 13L10 18L15 26L17 24L14 14L24 4Z" fill="#f59e0b"/>
+            </g>
+            <rect x="92" y="88" width="96" height="22" rx="6" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.35)"/>
+            <text x="140" y="103" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="700" font-family="Inter, sans-serif">MOW ⇄ AER</text>
+          </svg>
+          <div class="visual-caption">Маршруты и даты вылета</div>
+        </div>
+
+        <div class="visual-card">
+          <svg viewBox="0 0 280 128" fill="none">
+            <line x1="36" y1="84" x2="244" y2="84" stroke="#334155" stroke-width="6" stroke-linecap="round"/>
+            <line x1="36" y1="84" x2="168" y2="84" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="168" cy="84" r="10" fill="#38bdf8" stroke="#ffffff" stroke-width="2.5"/>
+            <rect x="114" y="30" width="108" height="32" rx="8" fill="rgba(245,158,11,0.16)" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="168" y="51" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="800" font-family="Inter, sans-serif">12 458 ₽</text>
+          </svg>
+          <div class="visual-caption">Динамический подбор цены</div>
+        </div>
+
+        <div class="visual-card">
+          <svg viewBox="0 0 280 128" fill="none">
+            <rect x="38" y="76" width="20" height="34" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="70" y="66" width="20" height="44" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="102" y="56" width="20" height="54" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="134" y="48" width="20" height="62" rx="3" fill="rgba(245,158,11,0.85)"/>
+            <rect x="166" y="48" width="20" height="62" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="166" y="34" width="20" height="14" rx="3" fill="rgba(244,63,94,0.8)"/>
+            <rect x="198" y="48" width="20" height="62" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="198" y="22" width="20" height="26" rx="3" fill="rgba(244,63,94,0.8)"/>
+            <rect x="230" y="48" width="20" height="62" rx="3" fill="rgba(56,189,248,0.55)"/>
+            <rect x="230" y="14" width="20" height="34" rx="3" fill="rgba(244,63,94,0.8)"/>
+            <line x1="26" y1="48" x2="258" y2="48" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6 4"/>
+          </svg>
+          <div class="visual-caption">Прогноз спроса и загрузки борта</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Официальные данные по маршрутам</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Маршрут</th>
+                <th style="text-align:left;">Направление</th>
+                <th>Базовая цена, ₽</th>
+                <th>Чувствительность</th>
+                <th>Себестоимость, ₽</th>
+                <th>Диапазон цен, ₽</th>
+                <th>Вместимость (мест)</th>
+              </tr>
+            </thead>
+            <tbody id="publicRoutesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Рабочий экран после входа -->
+    <section id="authorizedSection" style="display:none;">
+      <div class="workspace-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Параметры рейса</div>
+          </div>
+
+          <form id="calcForm" onsubmit="event.preventDefault(); calculateForecast();">
+            <!-- Кастомный выбор города Откуда -->
+            <div class="field">
+              <div class="field-label-row">
+                <label>Откуда</label>
+              </div>
+              <div class="city-dropdown" id="originDropdown">
+                <div class="city-trigger" onclick="toggleCityDropdown('origin', event)">
+                  <div class="city-trigger-main">
+                    <span id="originTriggerName">Москва</span>
+                    <span class="city-code-pill" id="originTriggerCode">MOW</span>
+                  </div>
+                  <svg class="city-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+                <div class="city-menu" id="originMenu"></div>
+              </div>
+            </div>
+
+            <div class="swap-cities-row">
+              <button type="button" class="swap-btn" onclick="swapOriginDestination()" title="Поменять города местами">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Кастомный выбор города Куда -->
+            <div class="field">
+              <div class="field-label-row">
+                <label>Куда</label>
+              </div>
+              <div class="city-dropdown" id="destinationDropdown">
+                <div class="city-trigger" onclick="toggleCityDropdown('destination', event)">
+                  <div class="city-trigger-main">
+                    <span id="destinationTriggerName">Сочи</span>
+                    <span class="city-code-pill" id="destinationTriggerCode">AER</span>
+                  </div>
+                  <svg class="city-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+                <div class="city-menu" id="destinationMenu"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="field-label-row">
+                <label for="dateInput">Дата вылета</label>
+                <span class="range-badge" id="dateRangeBadge">1 июня – 1 июля</span>
+              </div>
+              <input
+                type="text"
+                class="input-ctrl"
+                id="dateInput"
+                placeholder="12 июня"
+                required
+              />
+            </div>
+
+            <!-- Поле цены с точностью до 1 рубля и кнопками +/- 100 ₽ -->
+            <div class="field">
+              <div class="field-label-row">
+                <label for="priceInput">Цена билета, ₽</label>
+                <span class="range-badge" id="pricePreviewLabel">10 000 ₽</span>
+              </div>
+              <div class="price-input-group">
+                <button type="button" class="step-btn" onclick="stepPriceBy(-100)" title="Уменьшить на 100 ₽">−100</button>
+                <input
+                  type="number"
+                  class="input-ctrl no-spin"
+                  id="priceInput"
+                  step="1"
+                  min="1"
+                  max="100000"
+                  required
+                  oninput="onPriceDraftChange('input')"
+                />
+                <button type="button" class="step-btn" onclick="stepPriceBy(100)" title="Увеличить на 100 ₽">+100</button>
+              </div>
+              <input
+                type="range"
+                class="price-slider"
+                id="priceSlider"
+                step="1"
+                min="1000"
+                max="30000"
+                oninput="onPriceDraftChange('slider')"
+              />
+              <div class="quick-row">
+                <button type="button" class="btn-chip" onclick="applyPresetPrice('base')">Базовая</button>
+                <button type="button" class="btn-chip" onclick="applyPresetPrice('optimal')">Оптимальная (0.5)</button>
+              </div>
+            </div>
+
+            <div class="error-banner" id="calcErrorBanner"></div>
+
+            <button type="submit" class="btn btn-glow" style="width:100%;">
+              Рассчитать
+            </button>
+          </form>
+
+          <div class="meta-list">
+            <div class="meta-row"><span>Маршрут:</span> <strong id="metaRouteCode">—</strong></div>
+            <div class="meta-row"><span>Базовая цена:</span> <strong id="metaBasePrice">—</strong></div>
+            <div class="meta-row"><span>Чувствительность:</span> <strong id="metaSensitivity">—</strong></div>
+            <div class="meta-row"><span>Диапазон цен:</span> <strong id="metaBounds">—</strong></div>
+            <div class="meta-row"><span>Лучшая цена (0.5):</span> <strong id="metaOptPrice">—</strong></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="kpi-grid">
+            <div class="kpi-card c-blue">
+              <div class="kpi-label">Всего мест</div>
+              <div class="kpi-val" id="kpiSeats">—</div>
+              <div class="kpi-sub" id="kpiFreeSeats">Свободно: —</div>
+            </div>
+
+            <div class="kpi-card c-gold">
+              <div class="kpi-label">Желают (медиана)</div>
+              <div class="kpi-val" id="kpiWilling">—</div>
+              <div class="kpi-sub" id="kpiBaseDemand">При базовой: —</div>
+            </div>
+
+            <div class="kpi-card c-emerald">
+              <div class="kpi-label">Купят (продажи)</div>
+              <div class="kpi-val" id="kpiSold">—</div>
+              <div class="kpi-sub" id="kpiLoad">Загрузка: —%</div>
+            </div>
+
+            <div class="kpi-card c-indigo">
+              <div class="kpi-label">Прибыль</div>
+              <div class="kpi-val" id="kpiProfit">—</div>
+              <div class="kpi-sub" id="kpiRevenue">Выручка: —</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 18px;">
+            <div class="card-header">
+              <div class="card-title" id="chartTitleText">Распределение спроса (квантили 0.1 – 0.9)</div>
+              <div id="capStatusBadge"></div>
+            </div>
+            <div class="chart-container">
+              <canvas id="demandChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Сценарии спроса (0.1 – 0.9)</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Квантиль</th>
+                    <th>Базовый спрос</th>
+                    <th>Желают</th>
+                    <th>Купят</th>
+                    <th>Статус мест</th>
+                    <th>Лучшая цена, ₽</th>
+                    <th>Прибыль, млн ₽</th>
+                  </tr>
+                </thead>
+                <tbody id="scenariosTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно входа / регистрации -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal">
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab active" id="tabLoginBtn" onclick="switchAuthMode('login')">Вход</button>
+        <button type="button" class="modal-tab" id="tabRegisterBtn" onclick="switchAuthMode('register')">Регистрация</button>
+      </div>
+
+      <div class="error-banner" id="authErrorBanner"></div>
+
+      <form id="authForm" onsubmit="submitAuthForm(event)">
+        <div class="field">
+          <div class="field-label-row">
+            <label for="authUsername">Логин</label>
+          </div>
+          <input type="text" class="input-ctrl" id="authUsername" value="admin" required autocomplete="username" />
+        </div>
+
+        <div class="field">
+          <div class="field-label-row">
+            <label for="authPassword">Пароль</label>
+          </div>
+          <div class="password-wrap">
+            <input type="password" class="input-ctrl" id="authPassword" value="admin123" required autocomplete="current-password" />
+            <button type="button" class="eye-btn" onclick="togglePasswordVisibility()" title="Показать пароль">
+              <svg id="eyeIconOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eyeIconClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field" id="registerAvatarField" style="display:none;">
+          <div class="field-label-row">
+            <label>Аватар</label>
+          </div>
+          <div class="avatar-options-row" id="modalAvatarPicker" style="margin-top:4px;"></div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:18px;">
+          <button type="submit" class="btn btn-glow" style="flex:1;" id="authSubmitBtn">Войти</button>
+          <button type="button" class="btn btn-ghost" onclick="closeAuthModal()">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Зелёный аватар (#3) отцентрирован ровно по центру круга (20, 20)
+    const AVATARS = {
+      1: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#0284c7"/><circle cx="20" cy="15" r="6" fill="#f8fafc"/><path d="M9 35c2-6 7-9 11-9s9 3 11 9" fill="#f8fafc"/><path d="M12 12h16l-2-4H14l-2 4z" fill="#0f172a"/><path d="M17 10h6v1.5h-6z" fill="#f59e0b"/></svg>`,
+      2: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#6366f1"/><circle cx="20" cy="15" r="6" fill="#f8fafc"/><path d="M9 35c2-6 7-9 11-9s9 3 11 9" fill="#f8fafc"/><rect x="13" y="13" width="14" height="4" rx="2" fill="#0f172a"/></svg>`,
+      3: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#10b981"/><path d="M20 9L22.2 17L30 19.5L22.2 22L20 30L17.8 22L10 19.5L17.8 17L20 9Z" fill="#ffffff"/><circle cx="20" cy="19.5" r="2.3" fill="#10b981"/></svg>`,
+      4: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#f59e0b"/><circle cx="20" cy="15" r="6" fill="#0f172a"/><path d="M9 35c2-6 7-9 11-9s9 3 11 9" fill="#0f172a"/><circle cx="20" cy="15" r="2.5" fill="#fef3c7"/></svg>`,
+      5: `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#ec4899"/><circle cx="20" cy="20" r="12" stroke="#ffffff" stroke-width="2" stroke-opacity="0.6"/><circle cx="20" cy="20" r="6" stroke="#ffffff" stroke-width="2" stroke-opacity="0.85"/><line x1="20" y1="20" x2="29" y2="11" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><circle cx="25" cy="15" r="2.5" fill="#fde047"/></svg>`
+    };
+
+    let metadata = null;
+    let lastResult = null;
+    let chartInstance = null;
+    let authMode = 'login';
+    let selectedModalAvatar = 1;
+    let currentUser = null;
+    let authToken = localStorage.getItem('reshis_token') || null;
+
+    let selectedOrigin = 'MOW';
+    let selectedDestination = 'AER';
+
+    const seatsOverlayPlugin = {
+      id: 'seatsOverlayPlugin',
+      afterDatasetsDraw(chart) {
+        if (!lastResult) return;
+        const { ctx, chartArea, scales } = chart;
+        const yScale = scales.y;
+        const seatsY = yScale.getPixelForValue(lastResult.seats);
+        const barMeta = chart.getDatasetMeta(0);
+
+        ctx.save();
+
+        // 1. Красим в красный цвет всю часть столбца выше красной линии мест
+        if (barMeta && barMeta.data && seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
+          barMeta.data.forEach((bar) => {
+            if (bar.y < seatsY - 0.5) {
+              const left = bar.x - bar.width / 2;
+              const top = bar.y;
+              const width = bar.width;
+              const height = seatsY - bar.y;
+
+              ctx.save();
+              ctx.beginPath();
+              ctx.rect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, seatsY - chartArea.top);
+              ctx.clip();
+
+              ctx.fillStyle = 'rgba(244, 63, 94, 0.78)';
+              ctx.strokeStyle = '#f43f5e';
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.roundRect(left, top, width, height + 6, 6);
+              ctx.fill();
+              ctx.stroke();
+              ctx.restore();
+            }
+          });
+        }
+
+        // 2. Одна фиксированная красная линия доступных мест
+        if (seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
+          ctx.beginPath();
+          ctx.setLineDash([8, 6]);
+          ctx.lineWidth = 2.5;
+          ctx.strokeStyle = '#f43f5e';
+          ctx.moveTo(chartArea.left, seatsY);
+          ctx.lineTo(chartArea.right, seatsY);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          const tagText = `Доступно мест: ${lastResult.seats}`;
+          ctx.font = '700 11.5px Inter, sans-serif';
+          const textWidth = ctx.measureText(tagText).width;
+          const boxW = textWidth + 14;
+          const boxH = 20;
+          const boxX = chartArea.right - boxW - 8;
+          const boxY = Math.max(chartArea.top + 4, seatsY - boxH - 5);
+
+          ctx.fillStyle = '#f43f5e';
+          ctx.beginPath();
+          ctx.roundRect(boxX, boxY, boxW, boxH, 6);
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(tagText, boxX + 7, boxY + boxH / 2);
+        }
+
+        // 3. Подписи значений над каждым столбцом
+        if (barMeta && barMeta.data) {
+          ctx.font = '700 11px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+
+          barMeta.data.forEach((bar, idx) => {
+            const val = chart.data.datasets[0].data[idx];
+            const isMedian = idx === 4;
+            const label = isMedian ? `${val} (медиана)` : `${val}`;
+            const yPos = bar.y - 6;
+
+            if (isMedian) {
+              const w = ctx.measureText(label).width + 12;
+              ctx.fillStyle = '#f59e0b';
+              ctx.beginPath();
+              ctx.roundRect(bar.x - w / 2, yPos - 18, w, 19, 5);
+              ctx.fill();
+              ctx.fillStyle = '#0b1120';
+              ctx.fillText(label, bar.x, yPos - 2);
+            } else {
+              ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#e2e8f0' : '#1e293b';
+              ctx.fillText(label, bar.x, yPos);
+            }
+          });
+        }
+
+        ctx.restore();
+      }
+    };
+
+    async function initApp() {
+      const savedTheme = localStorage.getItem('reshis_theme') || 'dark';
+      setTheme(savedTheme);
+      renderModalAvatarPicker();
+      setupOutsideClicks();
+      await loadMetadata();
+      await verifySession();
+    }
+
+    function setupOutsideClicks() {
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#originDropdown')) {
+          document.getElementById('originDropdown').classList.remove('open');
+        }
+        if (!e.target.closest('#destinationDropdown')) {
+          document.getElementById('destinationDropdown').classList.remove('open');
+        }
+        if (!e.target.closest('#avatarWrapper')) {
+          const aw = document.getElementById('avatarWrapper');
+          if (aw) aw.classList.remove('open');
+        }
+      });
+    }
+
+    function toggleAvatarPopoverMobile(e) {
+      e.stopPropagation();
+      document.getElementById('avatarWrapper').classList.toggle('open');
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('reshis_theme', theme);
+      document.getElementById('themeIcon').textContent = theme === 'dark' ? '☀️' : '🌙';
+      if (lastResult) renderChart(lastResult);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    function renderModalAvatarPicker() {
+      const container = document.getElementById('modalAvatarPicker');
+      container.innerHTML = '';
+      [1, 2, 3, 4, 5].forEach(id => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'avatar-opt-btn' + (id === selectedModalAvatar ? ' selected' : '');
+        btn.innerHTML = AVATARS[id];
+        btn.onclick = () => {
+          selectedModalAvatar = id;
+          renderModalAvatarPicker();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderHeaderAvatarPicker() {
+      const container = document.getElementById('headerAvatarPicker');
+      container.innerHTML = '';
+      const activeId = currentUser ? (currentUser.avatar_id || 1) : 1;
+      [1, 2, 3, 4, 5].forEach(id => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'avatar-opt-btn' + (id === activeId ? ' selected' : '');
+        btn.innerHTML = AVATARS[id];
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          changeUserAvatar(id);
+          document.getElementById('avatarWrapper').classList.remove('open');
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    async function changeUserAvatar(avatarId) {
+      if (!authToken) return;
+      const res = await fetch('/api/avatar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ avatar_id: avatarId })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        currentUser.avatar_id = data.avatar_id;
+        updateAuthUI();
+      }
+    }
+
+    // Кастомные выпадающие списки для выбора города «Откуда» и «Куда»
+    function toggleCityDropdown(type, e) {
+      e.stopPropagation();
+      const targetId = type === 'origin' ? 'originDropdown' : 'destinationDropdown';
+      const otherId = type === 'origin' ? 'destinationDropdown' : 'originDropdown';
+      document.getElementById(otherId).classList.remove('open');
+      document.getElementById(targetId).classList.toggle('open');
+    }
+
+    function getAvailableDestinationsForOrigin(origCode) {
+      if (!metadata) return [];
+      const matchingRoutes = metadata.routes.filter(r => r.origin_code === origCode);
+      const destCodes = new Set(matchingRoutes.map(r => r.destination_code));
+      return metadata.cities.filter(c => destCodes.has(c.code));
+    }
+
+    function renderCityDropdowns() {
+      if (!metadata) return;
+
+      // 1. В списке «Откуда» доступны ВСЕ города маршрутной сети (Москва, Сочи, Санкт-Петербург, Казань, Екатеринбург, Новосибирск)
+      const origMenu = document.getElementById('originMenu');
+      origMenu.innerHTML = '';
+      metadata.cities.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'city-option' + (city.code === selectedOrigin ? ' selected' : '');
+        item.innerHTML = `<span>${city.name}</span><span class="city-code-pill">${city.code}</span>`;
+        item.onclick = (e) => {
+          e.stopPropagation();
+          selectOriginCity(city.code);
+        };
+        origMenu.appendChild(item);
+      });
+
+      const origObj = metadata.cities.find(c => c.code === selectedOrigin) || metadata.cities[0];
+      document.getElementById('originTriggerName').textContent = origObj.name;
+      document.getElementById('originTriggerCode').textContent = origObj.code;
+
+      // 2. Список «Куда» подстраивается под выбранный город отправления
+      const validDestinations = getAvailableDestinationsForOrigin(selectedOrigin);
+      if (!validDestinations.some(d => d.code === selectedDestination) && validDestinations.length > 0) {
+        selectedDestination = validDestinations[0].code;
+      }
+
+      const destMenu = document.getElementById('destinationMenu');
+      destMenu.innerHTML = '';
+      validDestinations.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'city-option' + (city.code === selectedDestination ? ' selected' : '');
+        item.innerHTML = `<span>${city.name}</span><span class="city-code-pill">${city.code}</span>`;
+        item.onclick = (e) => {
+          e.stopPropagation();
+          selectDestinationCity(city.code);
+        };
+        destMenu.appendChild(item);
+      });
+
+      const destObj = metadata.cities.find(c => c.code === selectedDestination) || validDestinations[0];
+      if (destObj) {
+        document.getElementById('destinationTriggerName').textContent = destObj.name;
+        document.getElementById('destinationTriggerCode').textContent = destObj.code;
+      }
+    }
+
+    function selectOriginCity(code) {
+      selectedOrigin = code;
+      document.getElementById('originDropdown').classList.remove('open');
+      renderCityDropdowns();
+      updateRoutePriceBounds(true);
+    }
+
+    function selectDestinationCity(code) {
+      selectedDestination = code;
+      document.getElementById('destinationDropdown').classList.remove('open');
+      renderCityDropdowns();
+      updateRoutePriceBounds(true);
+    }
+
+    function swapOriginDestination() {
+      const prevOrigin = selectedOrigin;
+      selectedOrigin = selectedDestination;
+      selectedDestination = prevOrigin;
+      renderCityDropdowns();
+      updateRoutePriceBounds(true);
+    }
+
+    async function loadMetadata() {
+      const res = await fetch('/api/metadata');
+      metadata = await res.json();
+
+      document.getElementById('dateRangeBadge').textContent = metadata.date_range.label;
+      document.getElementById('dateInput').value = metadata.date_range.default_input;
+
+      const pubBody = document.getElementById('publicRoutesTableBody');
+      pubBody.innerHTML = '';
+      metadata.public_schedule.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${r.route}</strong></td>
+          <td style="text-align:left;">${r.origin_name} ⇄ ${r.destination_name}</td>
+          <td>${r.base_price.toLocaleString('ru-RU')} ₽</td>
+          <td>${r.price_sensitivity}</td>
+          <td>${r.cost_per_passenger.toLocaleString('ru-RU')} ₽</td>
+          <td>${r.price_min.toLocaleString('ru-RU')} – ${r.price_max.toLocaleString('ru-RU')} ₽</td>
+          <td>${r.seats_summary}</td>
+        `;
+        pubBody.appendChild(tr);
+      });
+
+      renderCityDropdowns();
+      updateRoutePriceBounds(true);
+    }
+
+    function getSelectedRouteInfo() {
+      if (!metadata) return null;
+      const code = `${selectedOrigin}-${selectedDestination}`;
+      return metadata.routes.find(r => r.route === code) || metadata.routes[0];
+    }
+
+    function updateRoutePriceBounds(resetToBase = false) {
+      const r = getSelectedRouteInfo();
+      if (!r) return;
+      const slider = document.getElementById('priceSlider');
+      const input = document.getElementById('priceInput');
+      slider.min = r.price_min;
+      slider.max = r.price_max;
+      input.min = 1;
+      input.max = r.price_max * 2;
+
+      if (resetToBase || !input.value) {
+        const p = Math.round(r.base_price);
+        input.value = p;
+        slider.value = p;
+        document.getElementById('pricePreviewLabel').textContent = `${p.toLocaleString('ru-RU')} ₽`;
+      }
+
+      document.getElementById('metaRouteCode').textContent = `${r.route} (${r.origin_name} → ${r.destination_name})`;
+      document.getElementById('metaBasePrice').textContent = `${r.base_price.toLocaleString('ru-RU')} ₽`;
+      document.getElementById('metaSensitivity').textContent = r.price_sensitivity;
+      document.getElementById('metaBounds').textContent =
+        `${r.price_min.toLocaleString('ru-RU')} – ${r.price_max.toLocaleString('ru-RU')} ₽`;
+    }
+
+    // Точность цены до единиц рублей (1 ₽), а кнопки «−100» / «+100» меняют цену по сотне
+    function stepPriceBy(delta) {
+      const input = document.getElementById('priceInput');
+      const slider = document.getElementById('priceSlider');
+      const r = getSelectedRouteInfo();
+      const minP = r ? r.price_min : 500;
+      const maxP = r ? r.price_max : 100000;
+      const current = parseInt(input.value || '0', 10) || 0;
+      const nextVal = Math.max(minP, Math.min(maxP, current + delta));
+      input.value = nextVal;
+      slider.value = nextVal;
+      document.getElementById('pricePreviewLabel').textContent = `${nextVal.toLocaleString('ru-RU')} ₽`;
+    }
+
+    function onPriceDraftChange(source) {
+      const input = document.getElementById('priceInput');
+      const slider = document.getElementById('priceSlider');
+      if (source === 'slider') {
+        input.value = slider.value;
+      } else if (input.value) {
+        slider.value = input.value;
+      }
+      const val = parseInt(input.value || '0', 10);
+      if (!isNaN(val)) {
+        document.getElementById('pricePreviewLabel').textContent = `${val.toLocaleString('ru-RU')} ₽`;
+      }
+    }
+
+    function applyPresetPrice(type) {
+      const r = getSelectedRouteInfo();
+      let target = r ? r.base_price : 10000;
+      if (type === 'optimal' && lastResult) {
+        target = lastResult.optimal_price_median;
+      }
+      const rounded = Math.round(target);
+      document.getElementById('priceInput').value = rounded;
+      document.getElementById('priceSlider').value = rounded;
+      document.getElementById('pricePreviewLabel').textContent = `${rounded.toLocaleString('ru-RU')} ₽`;
+    }
+
+    async function calculateForecast() {
+      if (!authToken) {
+        openAuthModal('login');
+        return;
+      }
+      const errBanner = document.getElementById('calcErrorBanner');
+      errBanner.style.display = 'none';
+
+      const date = document.getElementById('dateInput').value.trim();
+      const price = Math.round(parseFloat(document.getElementById('priceInput').value || '0'));
+
+      const res = await fetch('/api/calculate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+          origin: selectedOrigin,
+          destination: selectedDestination,
+          date,
+          price
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        errBanner.textContent = data.detail || 'Ошибка расчёта';
+        errBanner.style.display = 'block';
+        return;
+      }
+
+      lastResult = data;
+      renderCalculationResult(data);
+    }
+
+    function formatSeatStatus(excess, freeSeats, capped) {
+      if (excess > 0) {
+        return `Превышает на ${excess} мест`;
+      }
+      if (capped) {
+        return `Все места заняты`;
+      }
+      return `Свободно ${freeSeats} мест`;
+    }
+
+    function renderCalculationResult(data) {
+      document.getElementById('metaRouteCode').textContent = `${data.route} (${data.origin_name} → ${data.destination_name})`;
+      document.getElementById('metaBasePrice').textContent = `${data.base_price.toLocaleString('ru-RU')} ₽`;
+      document.getElementById('metaSensitivity').textContent = data.price_sensitivity;
+      document.getElementById('metaBounds').textContent =
+        `${data.price_min.toLocaleString('ru-RU')} – ${data.price_max.toLocaleString('ru-RU')} ₽`;
+      document.getElementById('metaOptPrice').textContent = `${data.optimal_price_median.toLocaleString('ru-RU')} ₽`;
+
+      document.getElementById('kpiSeats').textContent = data.seats;
+      document.getElementById('kpiFreeSeats').textContent = `Свободно: ${data.free_seats} мест`;
+
+      document.getElementById('kpiWilling').textContent = data.willing;
+      document.getElementById('kpiBaseDemand').textContent = `При базовой: ${data.median_base_demand}`;
+
+      document.getElementById('kpiSold').textContent = data.sold;
+      document.getElementById('kpiLoad').textContent = `Загрузка: ${data.load_factor_pct}%`;
+
+      document.getElementById('kpiProfit').textContent = `${data.profit_mln.toFixed(2)} млн ₽`;
+      document.getElementById('kpiRevenue').textContent = `Выручка: ${data.revenue_mln.toFixed(2)} млн ₽`;
+
+      const badgeBox = document.getElementById('capStatusBadge');
+      const statusText = formatSeatStatus(data.excess, data.free_seats, data.capped_by_seats);
+      badgeBox.innerHTML = `<span class="status-pill ${data.capped_by_seats ? 'cap' : 'ok'}">${statusText}</span>`;
+
+      document.getElementById('chartTitleText').textContent =
+        `${data.route} · ${data.display_date} · Цена ${Math.round(data.price).toLocaleString('ru-RU')} ₽`;
+
+      const tbody = document.getElementById('scenariosTableBody');
+      tbody.innerHTML = '';
+      data.scenarios.forEach(s => {
+        const tr = document.createElement('tr');
+        if (s.quantile === '0.5') tr.className = 'median-highlight';
+        const qTitle = s.quantile === '0.5' ? '0.5 (медиана)' : s.quantile;
+        const rowStatus = formatSeatStatus(s.excess, s.free_seats, s.capped_by_seats);
+        tr.innerHTML = `
+          <td>${qTitle}</td>
+          <td>${s.base_demand}</td>
+          <td>${s.willing}</td>
+          <td>${s.sold}</td>
+          <td>
+            <span class="status-pill ${s.capped_by_seats ? 'cap' : 'ok'}">
+              ${rowStatus}
+            </span>
+          </td>
+          <td>${s.optimal_price.toLocaleString('ru-RU')} ₽</td>
+          <td>${s.profit_mln.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderChart(data);
+    }
+
+    function renderChart(data) {
+      const canvas = document.getElementById('demandChart');
+      const ctx = canvas.getContext('2d');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+      const labels = data.scenarios.map(s =>
+        s.quantile === '0.5' ? '0.5 (Медиана)' : s.quantile
+      );
+      const willingArr = data.scenarios.map(s => s.willing);
+
+      const allVals = [...willingArr, data.seats];
+      const minVal = Math.min(...allVals);
+      const maxVal = Math.max(...allVals);
+      const span = Math.max(40, maxVal - minVal);
+      const yMin = Math.max(0, Math.floor((minVal - span * 0.35) / 20) * 20);
+      const yMax = Math.ceil((maxVal + span * 0.25) / 20) * 20;
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        plugins: [seatsOverlayPlugin],
+        data: {
+          labels,
+          datasets: [
+            {
+              type: 'bar',
+              label: 'Желают купить',
+              data: willingArr,
+              backgroundColor: data.scenarios.map(s =>
+                s.quantile === '0.5'
+                  ? 'rgba(245, 158, 11, 0.85)'
+                  : 'rgba(56, 189, 248, 0.52)'
+              ),
+              borderColor: data.scenarios.map(s =>
+                s.quantile === '0.5' ? '#f59e0b' : '#38bdf8'
+              ),
+              borderWidth: 1.5,
+              borderRadius: 6,
+              barPercentage: 0.6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: isDark ? '#0f172a' : '#ffffff',
+              titleColor: isDark ? '#f1f5f9' : '#0f172a',
+              bodyColor: isDark ? '#cbd5e1' : '#334155',
+              borderColor: isDark ? '#334155' : '#cbd5e1',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                afterBody: function(context) {
+                  const idx = context[0].dataIndex;
+                  const sc = data.scenarios[idx];
+                  const lines = [
+                    `Купят билетов: ${sc.sold}`,
+                    `Всего мест в самолёте: ${data.seats}`
+                  ];
+                  if (sc.excess > 0) {
+                    lines.push(`Превышает на ${sc.excess} мест`);
+                  } else {
+                    lines.push(`Свободно мест: ${sc.free_seats}`);
+                  }
+                  return lines;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: yMin,
+              max: yMax,
+              grid: {
+                color: isDark ? 'rgba(148, 163, 184, 0.1)' : 'rgba(15, 23, 42, 0.07)'
+              },
+              ticks: {
+                color: isDark ? '#94a3b8' : '#64748b'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: isDark ? '#cbd5e1' : '#334155',
+                font: { weight: '600' }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('authPassword');
+      const openSvg = document.getElementById('eyeIconOpen');
+      const closedSvg = document.getElementById('eyeIconClosed');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        openSvg.style.display = 'none';
+        closedSvg.style.display = 'block';
+      } else {
+        pwdInput.type = 'password';
+        openSvg.style.display = 'block';
+        closedSvg.style.display = 'none';
+      }
+    }
+
+    function openAuthModal(mode) {
+      switchAuthMode(mode);
+      document.getElementById('authModal').classList.add('active');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('active');
+      document.getElementById('authErrorBanner').style.display = 'none';
+    }
+
+    function switchAuthMode(mode) {
+      authMode = mode;
+      document.getElementById('tabLoginBtn').classList.toggle('active', mode === 'login');
+      document.getElementById('tabRegisterBtn').classList.toggle('active', mode === 'register');
+      document.getElementById('registerAvatarField').style.display = mode === 'register' ? 'block' : 'none';
+      document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'Войти' : 'Зарегистрироваться';
+      document.getElementById('authErrorBanner').style.display = 'none';
+    }
+
+    async function submitAuthForm(e) {
+      e.preventDefault();
+      const username = document.getElementById('authUsername').value.trim();
+      const password = document.getElementById('authPassword').value;
+      const endpoint = authMode === 'login' ? '/api/login' : '/api/register';
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username,
+          password,
+          avatar_id: selectedModalAvatar
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        const err = document.getElementById('authErrorBanner');
+        err.textContent = data.detail || 'Ошибка';
+        err.style.display = 'block';
+        return;
+      }
+
+      authToken = data.token;
+      currentUser = data.user;
+      localStorage.setItem('reshis_token', authToken);
+      closeAuthModal();
+      updateAuthUI();
+      await calculateForecast();
+    }
+
+    async function verifySession() {
+      if (!authToken) {
+        currentUser = null;
+        updateAuthUI();
+        return;
+      }
+      const res = await fetch('/api/me', {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      if (res.ok) {
+        currentUser = await res.json();
+        updateAuthUI();
+        await calculateForecast();
+      } else {
+        authToken = null;
+        currentUser = null;
+        localStorage.removeItem('reshis_token');
+        updateAuthUI();
+      }
+    }
+
+    function updateAuthUI() {
+      const isLogged = Boolean(authToken && currentUser);
+      document.getElementById('guestLoginBtn').style.display = isLogged ? 'none' : 'inline-flex';
+      document.getElementById('userProfileArea').style.display = isLogged ? 'flex' : 'none';
+      document.getElementById('guestSection').style.display = isLogged ? 'none' : 'block';
+      document.getElementById('authorizedSection').style.display = isLogged ? 'block' : 'none';
+
+      if (isLogged) {
+        const avId = currentUser.avatar_id || 1;
+        document.getElementById('currentAvatarIcon').innerHTML = AVATARS[avId] || AVATARS[1];
+        document.getElementById('currentUserName').textContent = currentUser.username;
+        renderHeaderAvatarPicker();
+      }
+    }
+
+    async function handleLogout() {
+      if (authToken) {
+        await fetch('/api/logout', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+      }
+      authToken = null;
+      currentUser = null;
+      localStorage.removeItem('reshis_token');
+      updateAuthUI();
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
