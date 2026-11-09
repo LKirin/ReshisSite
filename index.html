@@ -2,7 +2,7 @@
 <html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Решись Авиа</title>
   <link rel="icon" href="/favicon.ico?v=7" type="image/x-icon" />
   <link rel="shortcut icon" href="/favicon.ico?v=7" type="image/x-icon" />
@@ -24,8 +24,8 @@
       --gold: #f59e0b;
       --emerald: #10b981;
       --rose: #f43f5e;
-      --header-bg: rgba(11, 17, 32, 0.92);
-      --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      --header-bg: rgba(11, 17, 32, 0.94);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     :root[data-theme="light"] {
@@ -44,8 +44,8 @@
       --gold: #d97706;
       --emerald: #059669;
       --rose: #e11d48;
-      --header-bg: rgba(255, 255, 255, 0.94);
-      --shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+      --header-bg: rgba(255, 255, 255, 0.96);
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
     }
 
     * {
@@ -55,16 +55,22 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      position: relative;
+    }
+
     body {
       font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
       background-image: var(--bg-mesh);
       background-attachment: fixed;
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.45;
       min-height: 100vh;
-      padding-bottom: 48px;
-      overflow-x: hidden;
+      padding-bottom: 36px;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
 
@@ -73,47 +79,49 @@
       top: 0;
       z-index: 150;
       background: var(--header-bg);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
+      padding: 8px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      width: 100%;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
       color: var(--text);
       user-select: none;
       flex-shrink: 0;
     }
 
     .brand-icon {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       flex-shrink: 0;
       object-fit: contain;
-      border-radius: 7px;
+      border-radius: 6px;
       display: block;
     }
 
     .brand-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: -0.3px;
       background: linear-gradient(90deg, var(--text) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      white-space: nowrap;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
@@ -123,26 +131,21 @@
       justify-content: center;
       gap: 6px;
       font-family: inherit;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
-      border-radius: 10px;
-      padding: 8px 14px;
+      border-radius: 8px;
+      padding: 7px 12px;
       cursor: pointer;
       border: 1px solid transparent;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.15s ease;
       white-space: nowrap;
+      user-select: none;
     }
 
     .btn-glow {
       background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
       color: #ffffff;
-      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
-    }
-
-    .btn-glow:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.38);
-      filter: brightness(1.06);
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.25);
     }
 
     .btn-ghost {
@@ -151,34 +154,30 @@
       border-color: var(--border);
     }
 
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
     .btn-chip {
       background: var(--surface-elevated);
       color: var(--text-muted);
       border: 1px solid var(--border);
-      padding: 4px 10px;
-      font-size: 11.5px;
-      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 11px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.15s ease;
+      transition: all 0.12s ease;
       white-space: nowrap;
+      user-select: none;
     }
 
-    .btn-chip:hover, .btn-chip:active {
+    .btn-chip:active, .btn-chip:hover {
       color: var(--text);
       border-color: var(--accent);
       background: rgba(56, 189, 248, 0.08);
     }
 
     .theme-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       color: var(--text);
@@ -189,35 +188,27 @@
       flex-shrink: 0;
     }
 
-    .theme-btn:hover {
-      border-color: var(--accent);
-    }
-
     .user-area {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .avatar-wrapper {
       position: relative;
       display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 3px 10px 3px 4px;
+      gap: 6px;
+      padding: 2px 8px 2px 3px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 999px;
       cursor: pointer;
     }
 
-    .avatar-wrapper:hover {
-      border-color: var(--accent);
-    }
-
     .avatar-circle {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -227,16 +218,16 @@
     }
 
     .avatar-circle svg {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       display: block;
     }
 
     .user-name-label {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text);
-      max-width: 90px;
+      max-width: 75px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -254,17 +245,8 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-6px);
-      transition: all 0.18s ease;
+      transition: all 0.16s ease;
       z-index: 200;
-    }
-
-    .avatar-wrapper::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      height: 10px;
     }
 
     .avatar-wrapper:hover .avatar-picker-popover,
@@ -280,14 +262,13 @@
     }
 
     .avatar-opt-btn {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       border: 2px solid transparent;
       padding: 0;
       background: transparent;
       cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -295,55 +276,53 @@
       flex-shrink: 0;
     }
 
-    .avatar-opt-btn svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .avatar-opt-btn:hover {
-      transform: scale(1.12);
-    }
-
     .avatar-opt-btn.selected {
       border-color: var(--accent);
     }
 
     .main-wrap {
-      max-width: 1240px;
-      margin: 22px auto 0;
-      padding: 0 16px;
+      max-width: 1200px;
+      margin: 14px auto 0;
+      padding: 0 10px;
+      width: 100%;
     }
 
     .visual-showcase {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 20px;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .visual-showcase {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
     }
 
     .visual-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 10px;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
     }
 
     .visual-card svg {
       width: 100%;
-      height: 115px;
-      border-radius: 12px;
+      height: 85px;
+      border-radius: 8px;
       background: var(--surface-input);
       border: 1px solid var(--border);
     }
 
     .visual-caption {
-      font-size: 13px;
+      font-size: 11.5px;
       font-weight: 700;
       color: var(--text);
       text-align: center;
@@ -351,79 +330,95 @@
 
     .workspace-grid {
       display: grid;
-      grid-template-columns: 345px 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       align-items: start;
+      width: 100%;
+      min-width: 0; /* Предотвращает распирание грида */
+    }
+
+    .workspace-grid > div {
+      min-width: 0; /* Обязательно для дочерних колонок грида */
+      width: 100%;
+    }
+
+    @media (min-width: 900px) {
+      .workspace-grid {
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 18px;
+      }
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
+      border-radius: 14px;
+      padding: 12px 14px;
       box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 10px;
       flex-wrap: wrap;
     }
 
     .card-title {
-      font-size: 14.5px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text);
     }
 
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 11px;
     }
 
     .field-label-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 5px;
-      gap: 8px;
+      margin-bottom: 4px;
+      gap: 6px;
     }
 
     .field label {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--text-muted);
     }
 
     .range-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       color: var(--accent);
       background: rgba(56, 189, 248, 0.1);
-      padding: 2px 7px;
-      border-radius: 6px;
+      padding: 2px 6px;
+      border-radius: 5px;
       white-space: nowrap;
     }
 
-    /* 16px предотвращает автозум в iOS Safari */
     .input-ctrl {
       width: 100%;
-      padding: 10px 12px;
-      font-size: 16px;
+      padding: 9px 10px;
+      font-size: 16px; /* Защита от автозума в iOS Safari */
       font-family: inherit;
       color: var(--text);
       background: var(--surface-input);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       outline: none;
       transition: border-color 0.15s ease;
     }
 
     @media (min-width: 600px) {
       .input-ctrl {
-        font-size: 14px;
+        font-size: 13.5px;
       }
     }
 
@@ -443,26 +438,27 @@
     .price-input-group {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      width: 100%;
     }
 
     .step-btn {
-      height: 42px;
-      padding: 0 12px;
-      border-radius: 10px;
+      height: 38px;
+      padding: 0 11px;
+      border-radius: 8px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       color: var(--text);
       font-family: inherit;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.15s ease;
+      transition: all 0.12s ease;
       user-select: none;
     }
 
-    .step-btn:hover, .step-btn:active {
+    .step-btn:active {
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -470,50 +466,45 @@
     .city-dropdown {
       position: relative;
       user-select: none;
+      width: 100%;
     }
 
     .city-trigger {
       width: 100%;
-      padding: 10px 12px;
-      font-size: 14.5px;
+      padding: 9px 10px;
+      font-size: 13.5px;
       color: var(--text);
       background: var(--surface-input);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: border-color 0.15s ease;
-    }
-
-    .city-trigger:hover,
-    .city-dropdown.open .city-trigger {
-      border-color: var(--border-focus);
     }
 
     .city-trigger-main {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-weight: 600;
     }
 
     .city-code-pill {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 6px;
+      padding: 2px 5px;
+      border-radius: 5px;
       background: var(--surface-elevated);
       color: var(--accent);
       border: 1px solid var(--border);
     }
 
     .city-arrow {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       color: var(--text-muted);
-      transition: transform 0.18s ease;
+      transition: transform 0.16s ease;
     }
 
     .city-dropdown.open .city-arrow {
@@ -523,21 +514,21 @@
 
     .city-menu {
       position: absolute;
-      top: calc(100% + 6px);
+      top: calc(100% + 4px);
       left: 0;
       right: 0;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       box-shadow: var(--shadow);
-      padding: 6px;
+      padding: 4px;
       z-index: 120;
-      max-height: 240px;
+      max-height: 200px;
       overflow-y: auto;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-6px);
-      transition: all 0.16s ease;
+      transform: translateY(-4px);
+      transition: all 0.15s ease;
     }
 
     .city-dropdown.open .city-menu {
@@ -550,21 +541,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 9px 11px;
-      border-radius: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 13.5px;
-      font-weight: 500;
+      font-size: 13px;
       color: var(--text);
-      transition: background 0.12s ease;
     }
 
-    .city-option:hover {
-      background: var(--surface-elevated);
-    }
-
-    .city-option.selected {
-      background: rgba(56, 189, 248, 0.14);
+    .city-option:active, .city-option.selected {
+      background: rgba(56, 189, 248, 0.12);
       color: var(--accent);
       font-weight: 700;
     }
@@ -572,45 +557,38 @@
     .swap-cities-row {
       display: flex;
       justify-content: center;
-      margin: -6px 0 8px;
+      margin: -3px 0 5px;
     }
 
     .swap-btn {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.18s ease;
-    }
-
-    .swap-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: rotate(180deg);
     }
 
     input[type="range"].price-slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 6px;
+      height: 5px;
       background: var(--border);
       border-radius: 999px;
       outline: none;
-      margin: 10px 0 6px;
+      margin: 8px 0 4px;
     }
 
     input[type="range"].price-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: var(--accent);
       border: 2px solid #ffffff;
@@ -619,26 +597,26 @@
 
     .quick-row {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       margin-top: 5px;
       flex-wrap: wrap;
     }
 
     .meta-list {
-      margin-top: 14px;
-      padding-top: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
+      gap: 4px;
+      font-size: 11.5px;
     }
 
     .meta-row {
       display: flex;
       justify-content: space-between;
       color: var(--text-muted);
-      gap: 8px;
+      gap: 6px;
     }
 
     .meta-row strong {
@@ -649,16 +627,23 @@
 
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .kpi-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     .kpi-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 14px;
+      border-radius: 12px;
+      padding: 9px 11px;
       position: relative;
       overflow: hidden;
     }
@@ -678,7 +663,7 @@
     .kpi-card.c-indigo::before { background: var(--accent-indigo); }
 
     .kpi-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -686,17 +671,17 @@
     }
 
     .kpi-val {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
-      margin-top: 4px;
+      margin-top: 2px;
       font-variant-numeric: tabular-nums;
       line-height: 1.15;
     }
 
     .kpi-sub {
-      font-size: 11.5px;
+      font-size: 10px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -704,26 +689,36 @@
 
     .chart-container {
       position: relative;
-      height: 330px;
+      height: 250px;
       width: 100%;
+      max-width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .chart-container {
+        height: 310px;
+      }
     }
 
     .table-wrap {
+      width: 100%;
+      max-width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      margin: 0 -2px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 12.5px;
+      font-size: 12px;
       font-variant-numeric: tabular-nums;
-      min-width: 580px;
+      min-width: 500px;
     }
 
     th, td {
-      padding: 9px 10px;
+      padding: 7px 9px;
       text-align: right;
       border-bottom: 1px solid var(--border);
       white-space: nowrap;
@@ -744,7 +739,7 @@
     th {
       color: var(--text-muted);
       font-weight: 600;
-      font-size: 11.5px;
+      font-size: 11px;
       background: var(--surface-elevated);
     }
 
@@ -760,9 +755,9 @@
     .status-pill {
       display: inline-flex;
       align-items: center;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
     }
 
@@ -779,14 +774,14 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(3, 7, 18, 0.75);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(3, 7, 18, 0.78);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 300;
-      padding: 16px;
+      padding: 12px;
     }
 
     .modal-backdrop.active {
@@ -796,32 +791,32 @@
     .modal {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       width: 100%;
-      max-width: 380px;
-      padding: 20px;
+      max-width: 350px;
+      padding: 16px;
       box-shadow: var(--shadow);
     }
 
     .modal-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      gap: 4px;
       background: var(--surface-input);
-      padding: 4px;
-      border-radius: 10px;
-      margin-bottom: 14px;
+      padding: 3px;
+      border-radius: 8px;
+      margin-bottom: 12px;
       border: 1px solid var(--border);
     }
 
     .modal-tab {
-      padding: 7px;
-      border-radius: 8px;
+      padding: 6px;
+      border-radius: 6px;
       border: none;
       background: transparent;
       color: var(--text-muted);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
     }
 
@@ -837,92 +832,40 @@
     }
 
     .password-wrap .input-ctrl {
-      padding-right: 42px;
+      padding-right: 36px;
     }
 
     .eye-btn {
       position: absolute;
-      right: 6px;
+      right: 5px;
       background: transparent;
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      padding: 6px;
+      padding: 4px;
       display: flex;
-    }
-
-    .eye-btn:hover {
-      color: var(--accent);
     }
 
     .error-banner {
       background: rgba(244, 63, 94, 0.14);
       border: 1px solid rgba(244, 63, 94, 0.35);
       color: var(--rose);
-      padding: 8px 11px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-bottom: 12px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      margin-bottom: 10px;
       display: none;
     }
 
-    /* Адаптивность под планшеты */
-    @media (max-width: 960px) {
-      .workspace-grid {
-        grid-template-columns: 1fr;
-      }
-      .visual-showcase {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Адаптивность под смартфоны */
-    @media (max-width: 640px) {
-      header {
-        padding: 8px 12px;
-      }
-      .brand-title {
-        font-size: 16px;
-      }
-      .main-wrap {
-        margin-top: 14px;
-        padding: 0 10px;
-      }
-      .card {
-        padding: 14px;
-        border-radius: 14px;
-      }
-      .kpi-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-      .kpi-card {
-        padding: 10px 12px;
-      }
-      .kpi-val {
-        font-size: 19px;
-      }
-      .kpi-sub {
-        font-size: 10.5px;
-      }
-      .chart-container {
-        height: 250px;
-      }
-      .btn {
-        padding: 7px 11px;
-        font-size: 12.5px;
-      }
+    @media (max-width: 480px) {
       .user-name-label {
         display: none;
       }
       .avatar-wrapper {
-        padding: 3px;
+        padding: 2px;
       }
       .avatar-picker-popover {
-        right: -30px;
-      }
-      .modal {
-        padding: 16px;
+        right: -20px;
       }
     }
   </style>
@@ -1038,7 +981,6 @@
           </div>
 
           <form id="calcForm" onsubmit="event.preventDefault(); calculateForecast();">
-            <!-- Город Откуда -->
             <div class="field">
               <div class="field-label-row">
                 <label>Откуда</label>
@@ -1058,14 +1000,13 @@
             </div>
 
             <div class="swap-cities-row">
-              <button type="button" class="swap-btn" onclick="swapOriginDestination()" title="Поменять города местами">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <button type="button" class="swap-btn" onclick="swapOriginDestination()" title="Поменять местами">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
                 </svg>
               </button>
             </div>
 
-            <!-- Город Куда -->
             <div class="field">
               <div class="field-label-row">
                 <label>Куда</label>
@@ -1084,7 +1025,6 @@
               </div>
             </div>
 
-            <!-- Дата вылета в формате ДД.ММ или ДД:ММ -->
             <div class="field">
               <div class="field-label-row">
                 <label for="dateInput">Дата вылета (ДД.ММ)</label>
@@ -1106,14 +1046,13 @@
               </div>
             </div>
 
-            <!-- Поле цены -->
             <div class="field">
               <div class="field-label-row">
                 <label for="priceInput">Цена билета, ₽</label>
                 <span class="range-badge" id="pricePreviewLabel">10 000 ₽</span>
               </div>
               <div class="price-input-group">
-                <button type="button" class="step-btn" onclick="stepPriceBy(-100)" title="Уменьшить на 100 ₽">−100</button>
+                <button type="button" class="step-btn" onclick="stepPriceBy(-100)">−100</button>
                 <input
                   type="number"
                   class="input-ctrl no-spin"
@@ -1125,7 +1064,7 @@
                   required
                   oninput="onPriceDraftChange('input')"
                 />
-                <button type="button" class="step-btn" onclick="stepPriceBy(100)" title="Увеличить на 100 ₽">+100</button>
+                <button type="button" class="step-btn" onclick="stepPriceBy(100)">+100</button>
               </div>
               <input
                 type="range"
@@ -1144,7 +1083,7 @@
 
             <div class="error-banner" id="calcErrorBanner"></div>
 
-            <button type="submit" class="btn btn-glow" style="width:100%; height:44px; margin-top:4px;">
+            <button type="submit" class="btn btn-glow" style="width:100%; height:40px; margin-top:4px;">
               Рассчитать
             </button>
           </form>
@@ -1169,7 +1108,7 @@
             <div class="kpi-card c-gold">
               <div class="kpi-label">Желают (0.5)</div>
               <div class="kpi-val" id="kpiWilling">—</div>
-              <div class="kpi-sub" id="kpiBaseDemand">При базовой: —</div>
+              <div class="kpi-sub" id="kpiBaseDemand">При баз.: —</div>
             </div>
 
             <div class="kpi-card c-emerald">
@@ -1185,9 +1124,9 @@
             </div>
           </div>
 
-          <div class="card" style="margin-bottom: 16px;">
+          <div class="card" style="margin-bottom: 14px;">
             <div class="card-header">
-              <div class="card-title" id="chartTitleText">Распределение спроса (квантили 0.1 – 0.9)</div>
+              <div class="card-title" id="chartTitleText">Распределение спроса (0.1 – 0.9)</div>
               <div id="capStatusBadge"></div>
             </div>
             <div class="chart-container">
@@ -1246,11 +1185,11 @@
           <div class="password-wrap">
             <input type="password" class="input-ctrl" id="authPassword" value="admin123" required autocomplete="current-password" />
             <button type="button" class="eye-btn" onclick="togglePasswordVisibility()" title="Показать пароль">
-              <svg id="eyeIconOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg id="eyeIconOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                 <circle cx="12" cy="12" r="3"/>
               </svg>
-              <svg id="eyeIconClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+              <svg id="eyeIconClosed" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
                 <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
                 <line x1="1" y1="1" x2="23" y2="23"/>
               </svg>
@@ -1265,9 +1204,9 @@
           <div class="avatar-options-row" id="modalAvatarPicker" style="margin-top:4px;"></div>
         </div>
 
-        <div style="display:flex; gap:8px; margin-top:16px;">
-          <button type="submit" class="btn btn-glow" style="flex:1; height:42px;" id="authSubmitBtn">Войти</button>
-          <button type="button" class="btn btn-ghost" style="height:42px;" onclick="closeAuthModal()">Отмена</button>
+        <div style="display:flex; gap:8px; margin-top:14px;">
+          <button type="submit" class="btn btn-glow" style="flex:1; height:38px;" id="authSubmitBtn">Войти</button>
+          <button type="button" class="btn btn-ghost" style="height:38px;" onclick="closeAuthModal()">Отмена</button>
         </div>
       </form>
     </div>
@@ -1293,6 +1232,26 @@
     let selectedOrigin = 'MOW';
     let selectedDestination = 'AER';
 
+    // Безопасный полифил для скругления прямоугольников (работает во всех версиях iOS и Android)
+    function drawRoundRectSafe(ctx, x, y, width, height, radius) {
+      if (typeof ctx.roundRect === 'function') {
+        ctx.beginPath();
+        ctx.roundRect(x, y, width, height, radius);
+        return;
+      }
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
     const seatsOverlayPlugin = {
       id: 'seatsOverlayPlugin',
       afterDatasetsDraw(chart) {
@@ -1304,7 +1263,6 @@
 
         ctx.save();
 
-        // 1. Подсветка избыточного спроса красным
         if (barMeta && barMeta.data && seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
           barMeta.data.forEach((bar) => {
             if (bar.y < seatsY - 0.5) {
@@ -1321,8 +1279,7 @@
               ctx.fillStyle = 'rgba(244, 63, 94, 0.78)';
               ctx.strokeStyle = '#f43f5e';
               ctx.lineWidth = 1.5;
-              ctx.beginPath();
-              ctx.roundRect(left, top, width, height + 6, 6);
+              drawRoundRectSafe(ctx, left, top, width, height + 6, 4);
               ctx.fill();
               ctx.stroke();
               ctx.restore();
@@ -1330,11 +1287,10 @@
           });
         }
 
-        // 2. Линия вместимости
         if (seatsY >= chartArea.top && seatsY <= chartArea.bottom) {
           ctx.beginPath();
-          ctx.setLineDash([8, 6]);
-          ctx.lineWidth = 2.2;
+          ctx.setLineDash([6, 5]);
+          ctx.lineWidth = 2;
           ctx.strokeStyle = '#f43f5e';
           ctx.moveTo(chartArea.left, seatsY);
           ctx.lineTo(chartArea.right, seatsY);
@@ -1343,42 +1299,38 @@
 
           const isMobile = window.innerWidth < 640;
           const tagText = isMobile ? `Мест: ${lastResult.seats}` : `Доступно мест: ${lastResult.seats}`;
-          ctx.font = '700 11px Inter, sans-serif';
+          ctx.font = '700 10.5px Inter, sans-serif';
           const textWidth = ctx.measureText(tagText).width;
-          const boxW = textWidth + 12;
-          const boxH = 19;
-          const boxX = chartArea.right - boxW - 6;
-          const boxY = Math.max(chartArea.top + 3, seatsY - boxH - 4);
+          const boxW = textWidth + 10;
+          const boxH = 18;
+          const boxX = chartArea.right - boxW - 4;
+          const boxY = Math.max(chartArea.top + 2, seatsY - boxH - 4);
 
           ctx.fillStyle = '#f43f5e';
-          ctx.beginPath();
-          ctx.roundRect(boxX, boxY, boxW, boxH, 5);
+          drawRoundRectSafe(ctx, boxX, boxY, boxW, boxH, 4);
           ctx.fill();
 
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
-          ctx.fillText(tagText, boxX + 6, boxY + boxH / 2);
+          ctx.fillText(tagText, boxX + 5, boxY + boxH / 2);
         }
 
-        // 3. Подписи значений над столбцами
         if (barMeta && barMeta.data) {
-          const isMobile = window.innerWidth < 640;
-          ctx.font = '700 10.5px Inter, sans-serif';
+          ctx.font = '700 10px Inter, sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'bottom';
 
           barMeta.data.forEach((bar, idx) => {
             const val = chart.data.datasets[0].data[idx];
             const isMedian = idx === 4;
-            const label = (isMedian && !isMobile) ? `${val} (мед.)` : `${val}`;
-            const yPos = bar.y - 5;
+            const label = `${val}`;
+            const yPos = bar.y - 4;
 
             if (isMedian) {
               const w = ctx.measureText(label).width + 8;
               ctx.fillStyle = '#f59e0b';
-              ctx.beginPath();
-              ctx.roundRect(bar.x - w / 2, yPos - 16, w, 17, 4);
+              drawRoundRectSafe(ctx, bar.x - w / 2, yPos - 14, w, 15, 3);
               ctx.fill();
               ctx.fillStyle = '#0b1120';
               ctx.fillText(label, bar.x, yPos - 2);
@@ -1389,7 +1341,7 @@
           });
         }
 
-        ctx.restore;
+        ctx.restore();
       }
     };
 
@@ -1704,13 +1656,9 @@
     }
 
     function formatSeatStatus(excess, freeSeats, capped) {
-      if (excess > 0) {
-        return `Превышает на ${excess} мест`;
-      }
-      if (capped) {
-        return `Все места заняты`;
-      }
-      return `Свободно ${freeSeats} мест`;
+      if (excess > 0) return `+${excess} мест`;
+      if (capped) return `Заняты`;
+      return `${freeSeats} мест`;
     }
 
     function renderCalculationResult(data) {
@@ -1722,16 +1670,16 @@
       document.getElementById('metaOptPrice').textContent = `${data.optimal_price_median.toLocaleString('ru-RU')} ₽`;
 
       document.getElementById('kpiSeats').textContent = data.seats;
-      document.getElementById('kpiFreeSeats').textContent = `Свободно: ${data.free_seats} мест`;
+      document.getElementById('kpiFreeSeats').textContent = `Свободно: ${data.free_seats}`;
 
       document.getElementById('kpiWilling').textContent = data.willing;
-      document.getElementById('kpiBaseDemand').textContent = `При базовой: ${data.median_base_demand}`;
+      document.getElementById('kpiBaseDemand').textContent = `Базовый: ${data.median_base_demand}`;
 
       document.getElementById('kpiSold').textContent = data.sold;
       document.getElementById('kpiLoad').textContent = `Загрузка: ${data.load_factor_pct}%`;
 
-      document.getElementById('kpiProfit').textContent = `${data.profit_mln.toFixed(2)} млн ₽`;
-      document.getElementById('kpiRevenue').textContent = `Выручка: ${data.revenue_mln.toFixed(2)} млн ₽`;
+      document.getElementById('kpiProfit').textContent = `${data.profit_mln.toFixed(2)}M ₽`;
+      document.getElementById('kpiRevenue').textContent = `Выручка: ${data.revenue_mln.toFixed(2)}M ₽`;
 
       const badgeBox = document.getElementById('capStatusBadge');
       const statusText = formatSeatStatus(data.excess, data.free_seats, data.capped_by_seats);
@@ -1745,7 +1693,7 @@
       data.scenarios.forEach(s => {
         const tr = document.createElement('tr');
         if (s.quantile === '0.5') tr.className = 'median-highlight';
-        const qTitle = s.quantile === '0.5' ? '0.5 (медиана)' : s.quantile;
+        const qTitle = s.quantile === '0.5' ? '0.5 (мед.)' : s.quantile;
         const rowStatus = formatSeatStatus(s.excess, s.free_seats, s.capped_by_seats);
         tr.innerHTML = `
           <td>${qTitle}</td>
@@ -1771,9 +1719,7 @@
       const ctx = canvas.getContext('2d');
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
-      const labels = data.scenarios.map(s =>
-        s.quantile === '0.5' ? '0.5' : s.quantile
-      );
+      const labels = data.scenarios.map(s => s.quantile === '0.5' ? '0.5' : s.quantile);
       const willingArr = data.scenarios.map(s => s.willing);
 
       const allVals = [...willingArr, data.seats];
@@ -1798,51 +1744,37 @@
               label: 'Желают купить',
               data: willingArr,
               backgroundColor: data.scenarios.map(s =>
-                s.quantile === '0.5'
-                  ? 'rgba(245, 158, 11, 0.85)'
-                  : 'rgba(56, 189, 248, 0.52)'
+                s.quantile === '0.5' ? 'rgba(245, 158, 11, 0.85)' : 'rgba(56, 189, 248, 0.52)'
               ),
-              borderColor: data.scenarios.map(s =>
-                s.quantile === '0.5' ? '#f59e0b' : '#38bdf8'
-              ),
+              borderColor: data.scenarios.map(s => s.quantile === '0.5' ? '#f59e0b' : '#38bdf8'),
               borderWidth: 1.5,
-              borderRadius: 6,
-              barPercentage: 0.65
+              borderRadius: 4,
+              barPercentage: 0.7
             }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          interaction: {
-            mode: 'index',
-            intersect: false
-          },
+          interaction: { mode: 'index', intersect: false },
           plugins: {
-            legend: {
-              display: false
-            },
+            legend: { display: false },
             tooltip: {
               backgroundColor: isDark ? '#0f172a' : '#ffffff',
               titleColor: isDark ? '#f1f5f9' : '#0f172a',
               bodyColor: isDark ? '#cbd5e1' : '#334155',
               borderColor: isDark ? '#334155' : '#cbd5e1',
               borderWidth: 1,
-              padding: 9,
+              padding: 8,
               callbacks: {
                 afterBody: function(context) {
                   const idx = context[0].dataIndex;
                   const sc = data.scenarios[idx];
-                  const lines = [
-                    `Купят билетов: ${sc.sold}`,
-                    `Всего мест: ${data.seats}`
+                  return [
+                    `Купят: ${sc.sold}`,
+                    `Всего мест: ${data.seats}`,
+                    sc.excess > 0 ? `Превышает: +${sc.excess}` : `Свободно: ${sc.free_seats}`
                   ];
-                  if (sc.excess > 0) {
-                    lines.push(`Превышает на ${sc.excess} мест`);
-                  } else {
-                    lines.push(`Свободно мест: ${sc.free_seats}`);
-                  }
-                  return lines;
                 }
               }
             }
@@ -1851,21 +1783,12 @@
             y: {
               min: yMin,
               max: yMax,
-              grid: {
-                color: isDark ? 'rgba(148, 163, 184, 0.1)' : 'rgba(15, 23, 42, 0.07)'
-              },
-              ticks: {
-                color: isDark ? '#94a3b8' : '#64748b'
-              }
+              grid: { color: isDark ? 'rgba(148, 163, 184, 0.08)' : 'rgba(15, 23, 42, 0.06)' },
+              ticks: { color: isDark ? '#94a3b8' : '#64748b' }
             },
             x: {
-              grid: {
-                display: false
-              },
-              ticks: {
-                color: isDark ? '#cbd5e1' : '#334155',
-                font: { weight: '600' }
-              }
+              grid: { display: false },
+              ticks: { color: isDark ? '#cbd5e1' : '#334155', font: { weight: '600' } }
             }
           }
         }
@@ -1991,4 +1914,3 @@
   </script>
 </body>
 </html>
-
